@@ -38,7 +38,7 @@ namespace IamtuseTechMakeEasyWeb.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserCategories_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -94,7 +94,7 @@ namespace IamtuseTechMakeEasyWeb.Data.Migrations
                         column: x => x.CategoryItemId,
                         principalTable: "CategoryItems",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
