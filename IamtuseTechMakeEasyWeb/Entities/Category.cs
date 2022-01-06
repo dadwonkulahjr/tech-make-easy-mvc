@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IamtuseTechMakeEasyWeb.Entities
 {
@@ -11,5 +13,10 @@ namespace IamtuseTechMakeEasyWeb.Entities
         public string ThumbnailImagePath { get; set; }
         [StringLength(255)]
         public string Description { get; set; }
+
+
+        //Nagivation Properties
+        [ForeignKey("CategoryId")]
+        public virtual ICollection<CategoryItem> CategoryItems { get; set; }
     }
 }
