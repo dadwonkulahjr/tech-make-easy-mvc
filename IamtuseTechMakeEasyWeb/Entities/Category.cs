@@ -18,5 +18,8 @@ namespace IamtuseTechMakeEasyWeb.Entities
         //Nagivation Properties
         [ForeignKey("CategoryId")]
         public virtual ICollection<CategoryItem> CategoryItems { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public virtual ICollection<UserCategory> UserCategories { get; set; }
     }
 }
