@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using IamtuseTechMakeEasyWeb.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IamtuseTechMakeEasyWeb.Entities
 {
-    public class MediaType
+    public class MediaType : IPrimaryProperties
     {
         public int Id { get; set; }
         [Required, StringLength(200, MinimumLength = 2)]
