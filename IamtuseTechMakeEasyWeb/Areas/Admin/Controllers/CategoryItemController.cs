@@ -21,9 +21,21 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
         }
 
         // GET: Admin/CategoryItem
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int categoryId)
         {
-            return View(await _context.CategoryItems.ToListAsync());
+           List<CategoryItem> categoryItems = await _context.CategoryItems
+                                                         .Where(x => x.CategoryId == categoryId)
+                                                         .Select(x => new CategoryItem()
+                                                         {
+                                                             Id = x.Id,
+                                                             Title = x.Title,
+                                                             Description = x.Description,
+                                                             DateTimeItemReleased = x.DateTimeItemReleased,
+                                                             CategoryId = categoryId,
+                                                             MediaTypeId = x.MediaTypeId,
+                                                         }).ToListAsync();
+
+            return View(categoryItems);
         }
 
         // GET: Admin/CategoryItem/Details/5
