@@ -95,12 +95,16 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            List<MediaType> mediaTypes = await _context.MediaTypes.ToListAsync();
 
             var categoryItem = await _context.CategoryItems.FindAsync(id);
             if (categoryItem == null)
             {
                 return NotFound();
             }
+
+            categoryItem.MediaTypes = mediaTypes.ConvertToSelectListItem(categoryItem.MediaTypeId); 
+
             return View(categoryItem);
         }
 
