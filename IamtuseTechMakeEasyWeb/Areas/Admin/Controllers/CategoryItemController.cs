@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IamtuseTechMakeEasyWeb.Data;
 using IamtuseTechMakeEasyWeb.Entities;
+using IamtuseTechMakeEasyWeb.Extensions;
 
 namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
 {
@@ -35,6 +36,8 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
                                                              MediaTypeId = x.MediaTypeId,
                                                          }).ToListAsync();
 
+            ViewBag.CategoryId = categoryId;
+
             return View(categoryItems);
         }
 
@@ -57,9 +60,16 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
         }
 
         // GET: Admin/CategoryItem/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int categoryId)
         {
-            return View();
+            List<MediaType> mediaTypes = await _context.MediaTypes.ToListAsync();
+            CategoryItem categoryItem = new()
+            {
+                CategoryId = categoryId,
+                MediaTypes = mediaTypes.ConvertToSelectListItem(0)
+            };
+
+            return View(categoryItem);
         }
 
         // POST: Admin/CategoryItem/Create
