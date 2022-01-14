@@ -169,7 +169,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
             var categoryItem = await _context.CategoryItems.FindAsync(id);
             _context.CategoryItems.Remove(categoryItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { catgoryId = categoryItem.CategoryId});
         }
 
         private bool CategoryItemExists(int id)
