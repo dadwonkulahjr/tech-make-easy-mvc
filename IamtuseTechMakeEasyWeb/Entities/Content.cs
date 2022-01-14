@@ -19,7 +19,7 @@ namespace IamtuseTechMakeEasyWeb.Entities
         public virtual CategoryItem CategoryItem { get; set; }
 
         [NotMapped]
-        public int CategoryItemId { get; set; }
+        public int CatItemId { get; set; }
         [NotMapped]
         public int CategoryId { get; set; }
     }
