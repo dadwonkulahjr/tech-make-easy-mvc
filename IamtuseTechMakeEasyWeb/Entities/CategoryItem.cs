@@ -24,6 +24,8 @@ namespace IamtuseTechMakeEasyWeb.Entities
 
         [NotMapped]
         public virtual ICollection<SelectListItem> MediaTypes { get; set; }
+        [NotMapped]
+        public int ContentId { get; set; }
 
     }
 }
