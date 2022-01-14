@@ -13,7 +13,7 @@ namespace IamtuseTechMakeEasyWeb.Entities
         public string Title { get; set; }
         [Column(TypeName ="date"), Required]
 
-        public DateTime? DateTimeItemReleased { get; set; }
+        public DateTime DateTimeItemReleased { get; set; }
         [StringLength(255)]
 
         public string Description { get; set; }
