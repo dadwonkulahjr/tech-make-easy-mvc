@@ -17,7 +17,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
         {
             _context = context;
         }
-     
+
         public IActionResult Create(int categoryId, int categoryItemId)
         {
             Content content = new()
@@ -28,29 +28,32 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
             return View(content);
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,HtmlContent,VideoLink")] Content content)
+        public async Task<IActionResult> Create([Bind("Id,Title,HtmlContent,VideoLink,CatItemId,CategoryId")] Content content)
         {
             if (ModelState.IsValid)
             {
+                content.CategoryItem = await _context.CategoryItems.FindAsync(content.CatItemId);
                 _context.Add(content);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "CategoryItem", new { categoryId = content.CategoryId });
             }
             return View(content);
         }
 
-  
-        public async Task<IActionResult> Edit(int? id)
+
+        public async Task<IActionResult> Edit(int categoryItemId, int categoryId)
         {
-            if (id == null)
+            if (categoryItemId == 0)
             {
                 return NotFound();
             }
 
-            var content = await _context.Contents.FindAsync(id);
+            var content = await _context.Contents.FirstOrDefaultAsync(c => c.CategoryItem.Id == categoryItemId);
+
+            content.CategoryId = categoryId;
             if (content == null)
             {
                 return NotFound();
@@ -58,10 +61,10 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
             return View(content);
         }
 
-     
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,HtmlContent,VideoLink")] Content content)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,HtmlContent,VideoLink,CategoryId")] Content content)
         {
             if (id != content.Id)
             {
@@ -86,7 +89,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "CategoryItem", new {categoryId = content.CategoryId });
             }
             return View(content);
         }
