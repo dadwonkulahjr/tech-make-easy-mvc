@@ -138,7 +138,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId});
             }
             return View(categoryItem);
         }
