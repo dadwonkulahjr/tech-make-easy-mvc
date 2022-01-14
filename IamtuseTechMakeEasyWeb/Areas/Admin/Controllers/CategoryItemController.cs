@@ -24,17 +24,29 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
         // GET: Admin/CategoryItem
         public async Task<IActionResult> Index(int categoryId)
         {
-            List<CategoryItem> categoryItems = await _context.CategoryItems
-                                                          .Where(x => x.CategoryId == categoryId)
-                                                          .Select(x => new CategoryItem()
-                                                          {
-                                                              Id = x.Id,
-                                                              Title = x.Title,
-                                                              Description = x.Description,
-                                                              DateTimeItemReleased = x.DateTimeItemReleased,
-                                                              CategoryId = categoryId,
-                                                              MediaTypeId = x.MediaTypeId,
-                                                          }).ToListAsync();
+            List<CategoryItem> categoryItems = await (from catItem in _context.CategoryItems
+                                                      join contentItem in _context.Contents
+                                                      on catItem.Id equals contentItem.CategoryItem.Id
+                                                      into contentGroup
+                                                      from subContent in contentGroup.DefaultIfEmpty()
+                                                      where catItem.CategoryId == categoryId
+                                                      select new CategoryItem()
+                                                      {
+                                                          Id = catItem.Id,
+                                                          Title = catItem.Title,
+                                                          Description = catItem.Description,
+                                                          DateTimeItemReleased = catItem.DateTimeItemReleased,
+                                                          CategoryId = categoryId,
+                                                          MediaTypeId = catItem.MediaTypeId,
+                                                          ContentId = (subContent != null) ? subContent.Id : 0
+                                                      }).ToListAsync();
+
+
+
+
+
+
+
 
             ViewBag.CategoryId = categoryId;
 
@@ -103,7 +115,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            categoryItem.MediaTypes = mediaTypes.ConvertToSelectListItem(categoryItem.MediaTypeId); 
+            categoryItem.MediaTypes = mediaTypes.ConvertToSelectListItem(categoryItem.MediaTypeId);
 
             return View(categoryItem);
         }
@@ -138,7 +150,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId});
+                return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId });
             }
             return View(categoryItem);
         }
@@ -169,7 +181,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
             var categoryItem = await _context.CategoryItems.FindAsync(id);
             _context.CategoryItems.Remove(categoryItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId});
+            return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId });
         }
 
         private bool CategoryItemExists(int id)
