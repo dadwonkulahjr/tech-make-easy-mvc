@@ -18,9 +18,14 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
             _context = context;
         }
      
-        public IActionResult Create()
+        public IActionResult Create(int categoryId, int categoryItemId)
         {
-            return View();
+            Content content = new()
+            {
+                CategoryId = categoryId,
+                CatItemId = categoryItemId
+            };
+            return View(content);
         }
 
        

@@ -43,11 +43,11 @@
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
                     @if (item.ContentId == 0)
                     {
-                        <a asp-action="Create" asp-controller="Content" asp-route-id="@item.Id">Add Content</a>
+                        <a asp-action="Create" asp-controller="Content" asp-route-categoryItemId="@item.Id" asp-route-categoryId="@item.CategoryId">Add Content</a>
                     }
                     else
                     {
-                        <a asp-action="Edit" asp-controller="Content" asp-route-id="@item.Id">Update Content</a>
+                        <a asp-action="Edit" asp-controller="Content" asp-route-categoryItemId="@item.Id" asp-route-categoryId="@item.CategoryId">Update Content</a>
                     }
                 </td>
 
