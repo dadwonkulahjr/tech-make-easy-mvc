@@ -17,32 +17,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
         {
             _context = context;
         }
-
      
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Contents.ToListAsync());
-        }
-
-      
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var content = await _context.Contents
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (content == null)
-            {
-                return NotFound();
-            }
-
-            return View(content);
-        }
-
-        
         public IActionResult Create()
         {
             return View();
@@ -57,7 +32,7 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
             {
                 _context.Add(content);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             return View(content);
         }
@@ -106,40 +81,10 @@ namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             return View(content);
         }
-
-     
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var content = await _context.Contents
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (content == null)
-            {
-                return NotFound();
-            }
-
-            return View(content);
-        }
-
-      
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var content = await _context.Contents.FindAsync(id);
-            _context.Contents.Remove(content);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool ContentExists(int id)
         {
             return _context.Contents.Any(e => e.Id == id);
