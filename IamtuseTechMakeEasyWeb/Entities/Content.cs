@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IamtuseTechMakeEasyWeb.Entities
 {
@@ -16,5 +17,10 @@ namespace IamtuseTechMakeEasyWeb.Entities
         //Foreign Key Constraint
 
         public virtual CategoryItem CategoryItem { get; set; }
+
+        [NotMapped]
+        public int CategoryItemId { get; set; }
+        [NotMapped]
+        public int CategoryId { get; set; }
     }
 }
