@@ -1,3 +1,7 @@
 ﻿$(document).ready(function () {
-    $('#DateTimeItemReleased').datepicker();
+    $('.datepicker').datepicker(
+        {
+            dateFormat: "yyyy-mm-dd"
+        }
+    );
 });
