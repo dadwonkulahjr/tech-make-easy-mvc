@@ -11,7 +11,7 @@ namespace IamtuseTechMakeEasyWeb.Entities
         public int Id { get; set; }
         [StringLength(200, MinimumLength =2)]
         public string Title { get; set; }
-        [Column(TypeName ="date"), Required]
+        [Column(TypeName ="date"), Required, DisplayFormat(DataFormatString ="0:yyyy-MM-DD")]
 
         public DateTime DateTimeItemReleased { get; set; }
         [StringLength(255)]
