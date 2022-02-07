@@ -1,9 +1,15 @@
 ﻿$(document).ready(function () {
-    $('.myCustomDate').datepicker(
-        {
-            dateFormat: "yy-mm-dd",
-            minDate: new Date(),
-            maxDate: addSubstractMonth(new Date(), 2)
-        }
-    );
+    function wireUpDatePicker() {
+        const addMonths = 2;
+        var currentDate = new Date();
+        $('.myCustomDate').datepicker(
+            {
+                dateFormat: "yy-mm-dd",
+                minDate: currentDate,
+                maxDate: addSubstractMonth(currentDate, addMonths)
+            }
+        );
+    }
+
+    wireUpDatePicker();
 });
