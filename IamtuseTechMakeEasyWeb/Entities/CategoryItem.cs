@@ -12,7 +12,7 @@ namespace IamtuseTechMakeEasyWeb.Entities
         public int Id { get; set; }
         [StringLength(200, MinimumLength =2)]
         public string Title { get; set; }
-        [Column(TypeName ="date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Column(TypeName ="date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
 
         public DateTime DateTimeItemReleased
         {
