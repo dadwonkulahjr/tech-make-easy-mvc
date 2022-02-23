@@ -29,7 +29,7 @@ namespace IamtuseTechMakeEasyWeb.Entities
         [StringLength(255)]
 
         public string Description { get; set; }
-        [Display(Name ="MediaType")]
+        [Display(Name ="Media Type")]
         public int MediaTypeId { get; set; }
 
         public int CategoryId { get; set; }
