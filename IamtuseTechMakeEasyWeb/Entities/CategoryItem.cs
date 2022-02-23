@@ -10,9 +10,10 @@ namespace IamtuseTechMakeEasyWeb.Entities
     {
         private DateTime _releasedDate = DateTime.MinValue;
         public int Id { get; set; }
-        [StringLength(200, MinimumLength =2)]
+        [StringLength(200, MinimumLength =2), Required]
         public string Title { get; set; }
-        [Column(TypeName ="date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [Column(TypeName ="date"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}"),
+            Display(Name ="Date Released")]
 
         public DateTime DateTimeItemReleased
         {
@@ -28,7 +29,7 @@ namespace IamtuseTechMakeEasyWeb.Entities
         [StringLength(255)]
 
         public string Description { get; set; }
-
+        [Display(Name ="MediaType")]
         public int MediaTypeId { get; set; }
 
         public int CategoryId { get; set; }
