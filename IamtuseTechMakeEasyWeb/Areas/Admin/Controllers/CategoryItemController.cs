@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using IamtuseTechMakeEasyWeb.Data;
 using IamtuseTechMakeEasyWeb.Entities;
 using IamtuseTechMakeEasyWeb.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryItemController : Controller
     {
         private readonly ApplicationDbContext _context;

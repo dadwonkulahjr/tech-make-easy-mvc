@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IamtuseTechMakeEasyWeb.Data;
 using IamtuseTechMakeEasyWeb.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IamtuseTechMakeEasyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ContentController : Controller
     {
         private readonly ApplicationDbContext _context;
