@@ -8,9 +8,9 @@ namespace IamtuseTechMakeEasyWeb.Entities
         public int Id { get; set; }
         [Required, StringLength(200, MinimumLength = 2)]
         public string Title { get; set; }
-        [StringLength(255, MinimumLength = 5)]
+        [StringLength(255, MinimumLength = 5), Display(Name ="Html Content")]
         public string HtmlContent { get; set; }
-        [StringLength(255, MinimumLength = 5)]
+        [StringLength(255, MinimumLength = 5), Display(Name ="Video Link")]
         public string VideoLink { get; set; }
 
         //Navigation Properties
