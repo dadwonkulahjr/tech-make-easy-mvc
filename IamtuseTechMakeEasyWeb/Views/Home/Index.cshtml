@@ -10,6 +10,10 @@
     <partial name="_UserLoginPartial" />
 </div>
 
+<div class="modal fade" id="UserRegistrationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <partial name="_UserRegistrationPartial" />
+</div>
+
 @section Scripts {
     <script src="~/js/userLogin.js" asp-append-version="true"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
