@@ -8,6 +8,7 @@
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+               <div id="user_login"></div>
             <form id="userLoginForm" asp-controller="UserAuth" asp-action="Login">
                 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                   <input hidden="hidden" asp-for="LoginInvalid" />
