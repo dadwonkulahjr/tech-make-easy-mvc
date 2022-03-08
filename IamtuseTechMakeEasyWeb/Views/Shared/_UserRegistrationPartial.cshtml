@@ -1,26 +1,27 @@
 ﻿@model RegistrationModel
 <!-- Modal -->
-<div class="modal-dialog">
+<div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Register</h5>
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <div id="placeholder_email_exists"></div>
             <form id="UserRegistrationForm" name="UserRegistrationForm" asp-action="RegisterUser" asp-controller="UserAuth">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input hidden="hidden" asp-for="RegistrationInvalid" />
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" asp-for="Email"></label>
                     <div class="col-md-8">
-                        <input asp-for="Email" class="form-control" placeholder="Email Address..." />
+                        <input asp-for="Email" class="form-control" placeholder="Email Address" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="Password"></label>
                     <div class="col-md-8">
-                        <input asp-for="Password" class="form-control" placeholder="Password..." />
+                        <input asp-for="Password" class="form-control" placeholder="Password" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="ConfirmPassword"></label>
                     <div class="col-md-8">
-                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password..." />
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
@@ -36,7 +37,7 @@
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="FirstName"></label>
                     <div class="col-md-8">
-                        <input asp-for="FirstName" class="form-control" placeholder="First Name..." />
+                        <input asp-for="FirstName" class="form-control" placeholder="First Name" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="LastName"></label>
                     <div class="col-md-8">
-                        <input asp-for="LastName" class="form-control" placeholder="Last Name..." />
+                        <input asp-for="LastName" class="form-control" placeholder="Last Name" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                 </div>
@@ -52,7 +53,7 @@
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="Address1"></label>
                     <div class="col-md-8">
-                        <input asp-for="Address1" class="form-control" placeholder="Address1..." />
+                        <input asp-for="Address1" class="form-control" placeholder="Address1" />
                         <span asp-validation-for="Address1" class="text-danger"></span>
                     </div>
                 </div>
@@ -60,7 +61,7 @@
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="Address2"></label>
                     <div class="col-md-8">
-                        <input asp-for="Address2" class="form-control" placeholder="Address2..." />
+                        <input asp-for="Address2" class="form-control" placeholder="Address2" />
                         <span asp-validation-for="Address2" class="text-danger"></span>
                     </div>
                 </div>
@@ -68,7 +69,7 @@
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="PostCode"></label>
                     <div class="col-md-8">
-                        <input asp-for="PostCode" class="form-control" placeholder="Post Code..." />
+                        <input asp-for="PostCode" class="form-control" placeholder="Post Code" />
                         <span asp-validation-for="PostCode" class="text-danger"></span>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
                 <div class="form-group row mt-1">
                     <label class="col-sm-4 col-form-label" asp-for="PhoneNumber"></label>
                     <div class="col-md-8">
-                        <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number..." />
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
                 </div>
@@ -95,8 +96,8 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button id="register" name="register" type="submit" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="register" name="register" type="button" class="btn btn-success">Register</button>
         </div>
     </div>
 </div>
