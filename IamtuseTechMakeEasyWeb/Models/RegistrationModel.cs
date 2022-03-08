@@ -13,12 +13,13 @@ namespace IamtuseTechMakeEasyWeb.Models
         public string ConfirmPassword { get; set; }
         [Required]
         public string Address1 { get; set; }
+        [Required]
         public string Address2 { get; set; }
-        [Display(Name ="Post Code")]
+        [Display(Name ="Post Code"), Required]
         public string PostCode { get; set; }
-        [Display(Name ="First Name")]
+        [Display(Name ="First Name"), Required]
         public string FirstName { get; set; }
-        [Display(Name ="Last Name")]
+        [Display(Name ="Last Name"), Required]
         public string LastName { get; set; }
         [Display(Name ="Acccept User Agreement")]
         public bool AcceptUserAgreement { get; set; }
@@ -26,7 +27,7 @@ namespace IamtuseTechMakeEasyWeb.Models
         public string RegistrationInvalid { get; set; }
 
 
-        [Display(Name ="Phone Number")]
+        [Display(Name ="Phone Number"), Required]
         public string PhoneNumber { get; set; }
 
     }
