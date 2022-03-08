@@ -3,6 +3,8 @@ using IamtuseTechMakeEasyWeb.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IamtuseTechMakeEasyWeb.Controllers
@@ -66,5 +68,57 @@ namespace IamtuseTechMakeEasyWeb.Controllers
             return RedirectToAction("index", "home");
 
         }
+        [HttpPost, ValidateAntiForgeryToken, AllowAnonymous]
+        public async Task<IActionResult> RegisterUser(RegistrationModel model)
+        {
+            model.RegistrationInvalid = "true";
+
+            if (!ModelState.IsValid) { return PartialView("_UserRegistrationPartial", model); }
+
+            ApplicationUser newUser = new()
+            {
+                Email = model.Email,
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Address1 = model.Address1,
+                Address2 = model.Address2,
+                PostCode = model.PostCode,
+                PhoneNumber = model.PhoneNumber,
+
+            };
+
+            var result = await _userManager.CreateAsync(newUser, model.Password);
+
+
+            if (result.Succeeded)
+            {
+                model.RegistrationInvalid = "";
+
+                await _signInManager.SignInAsync(newUser, isPersistent: false);
+
+                return PartialView("_UserRegistrationPartial", model);
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+
+            return PartialView("_UserRegistrationPartial", model);
+
+        }
+
+        [AllowAnonymous]
+        public async Task<bool> CheckIfEmailExists(string userName)
+        {
+            bool exists = await _context.Users.AnyAsync(x => x.UserName.ToUpper() == userName.ToUpper());
+            if (exists)
+                return true;
+
+            return false;
+        }
+
     }
 }
