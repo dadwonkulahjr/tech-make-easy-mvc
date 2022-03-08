@@ -1,9 +1,9 @@
 ﻿$(function () {
-    var userLoginButton = $('#UserLoginModal button[class="btn btn-success"]').click(onClickLoginUsers);
+    var userLoginButton = $('#UserLoginModal button[name="login"]').click(onClickLoginUsers);
 
     function onClickLoginUsers() {
 
-        var url = "userAuth/Login";
+        var url = "/userAuth/Login";
 
         var retrievedToken = $('#UserLoginModal input[name="__RequestVerificationToken"]').val();
 
@@ -43,11 +43,17 @@
                 }
                 else {
                   
-                    location.href = "Home/Index";
+                    location.href = "/Home/Index";
                    
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
+
+                var errorText = 'Status: ' + xhr.status + ' - ' + xhr.statusText;
+                presentClosableBootstrapAlert('#user_login', 'danger', 'Error!', errorText);
+
+                console.error(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr.responseText);
+
                 console.error(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr.responseText);
             }
         });
