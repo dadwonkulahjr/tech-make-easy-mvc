@@ -32,7 +32,13 @@ namespace IamtuseTechMakeEasyWeb
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-          
+            //services.ConfigureExternalCookie(cookieOptions =>
+            //{
+            //    //cookieOptions.AccessDeniedPath = new PathString("");
+            //    cookieOptions.LoginPath = new PathString("/UserAuth/Login");
+               
+            //});
+
 
 
 
