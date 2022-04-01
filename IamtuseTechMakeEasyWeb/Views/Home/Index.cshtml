@@ -1,30 +1,22 @@
 ﻿@model CategoryDetailsModel
-@inject SignInManager<ApplicationUser> SignInManager
-
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@if (SignInManager.IsSignedIn(User))
+@if (Model.GroupedCategoryItemsByCategoryModels != null)
 {
-   @* <div class="row">
-        <div class="text-center">
-            <h1 class="display-4">Welcome to iamtuseTechMakeEasy!!!</h1>
+    @if (Model.GroupedCategoryItemsByCategoryModels.Count() > 0)
+    {
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h2>Your Courses</h2>
+
+            </div>
         </div>
-    </div>*@
 
-    <div class="row mt-5">
-        <div class="col-md-6">
-            <h2>Your Courses</h2>
-
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-md-12">
-            @if (Model.GroupedCategoryItemsByCategoryModels != null)
-            {
-                foreach (var cat in Model.GroupedCategoryItemsByCategoryModels)
+        <div class="row mt-3">
+            <div class="col-md-12">
+                @foreach (var cat in Model.GroupedCategoryItemsByCategoryModels)
                 {
                     <div class="card mt-2">
                         <h4 class="card-header text-secondary bg-white" style="cursor:pointer;"
@@ -53,17 +45,23 @@
                         </div>
                     </div>
                 }
-            }
 
+
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <h4 class="mt-2 text-warning">You're currently not matched with any courses!</h4>
+    }
 }
 else
 {
+    <partial name="_DefaultHomePageContentPartial" model="Model.Categories"></partial>
 
-    <div class="text-center">
+    @* <div class="text-center">
         <h1 class="display-4">Not Login yet.</h1>
-    </div>
+        </div>*@
 }
 
 <div class="modal fade" id="UserLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -81,7 +79,7 @@ else
             Email = string.Empty,
             PhoneNumber = string.Empty,
             ConfirmPassword = string.Empty,
-            PostCode = string.Empty,    
+            PostCode = string.Empty,
             AcceptUserAgreement = false,
             Password = string.Empty
         }
