@@ -1,4 +1,5 @@
 ﻿using IamtuseTechMakeEasyWeb.Data;
+using IamtuseTechMakeEasyWeb.Entities;
 using IamtuseTechMakeEasyWeb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,27 @@ namespace IamtuseTechMakeEasyWeb.Controllers
             _applicationDbContext = applicationDbContext;
             _signInManager = signInManager;
             _userManager = userManager;
+        }
+        private async Task<List<Category>> GetCategoriesThatHaveContent()
+        {
+            var categoriesWithContent = await (from category in _applicationDbContext.Categories
+                                    join categoryItem in _applicationDbContext.CategoryItems
+                                    on category.Id equals categoryItem.CategoryId
+                                    join content in _applicationDbContext.Contents
+                                    on categoryItem.Id equals content.CategoryItem.Id
+                                    select new Category
+                                    {
+                                        Id = category.Id,
+                                        Title = category.Title,
+                                        Description = category.Description,
+                                        ThumbnailImagePath = category.ThumbnailImagePath
+                                    }
+                                    )
+                                    .Distinct()
+                                    .OrderBy(x => x.Title)
+                                    .ToListAsync();
+
+            return categoriesWithContent;
         }
         private  IEnumerable<GroupedCategoryItemsByCategoryModel> GetGroupedCategoryItemsByCategories(
             IEnumerable<CategoryItemDetailsModel> categoryItemDetailsModels)
@@ -84,6 +106,11 @@ namespace IamtuseTechMakeEasyWeb.Controllers
                     model.GroupedCategoryItemsByCategoryModels = groupedCategoriesModels;
                 }
 
+            }
+            else
+            {
+                var categoriesWithContent = await GetCategoriesThatHaveContent();
+                model.Categories = categoriesWithContent;
             }
 
             return View(model);
