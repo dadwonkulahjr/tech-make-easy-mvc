@@ -174,3 +174,7 @@ a:hover .card{
 .card-body p:hover{
     text-decoration:underline;
 }
+
+.main-default{
+    margin-top:70px;
+}
