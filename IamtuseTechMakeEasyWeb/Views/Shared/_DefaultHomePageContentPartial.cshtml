@@ -18,13 +18,14 @@
 <di class="courses section" id="courses">
     <h3 class="section-header">Courses</h3>
     @{
-        var count = Model.Count() / 4;
+        const int itemsPerRow = 4;
+        var count = Model.Count() / itemsPerRow;
         var catList = new List<Category>();
 
     }
     @for (int i = 0; i <= count; i++)
     {
-        catList = Model.Skip(i * 4).Take(4).ToList();
+        catList = Model.Skip(i * itemsPerRow).Take(itemsPerRow).ToList();
         <partial name="_DisplayCardRowPartial" model="catList" />
     }
 </di>
