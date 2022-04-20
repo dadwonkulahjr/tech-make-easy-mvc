@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" asp-route-categoryId="@ViewBag.CategoryId">Create New</a>
+     <partial name="_CreateButtonPartial" model="@ViewBag.CategoryId" />
 </p>
 <table class="table">
     <thead>
@@ -41,11 +41,11 @@
                     <partial name="_RUDButtonPartial" model="@item.Id" />
                     @if (item.ContentId == 0)
                     {
-                        <a asp-action="Create" asp-controller="Content" asp-route-categoryItemId="@item.Id" asp-route-categoryId="@item.CategoryId">Add Content</a>
+                        <a asp-action="Create" asp-controller="Content" asp-route-categoryItemId="@item.Id" asp-route-categoryId="@item.CategoryId" class="btn btn-outline-secondary btn-sm">Add Content</a>
                     }
                     else
                     {
-                        <a asp-action="Edit" asp-controller="Content" asp-route-categoryItemId="@item.Id" asp-route-categoryId="@item.CategoryId">Edit Content</a>
+                        <a asp-action="Edit" asp-controller="Content" asp-route-categoryItemId="@item.Id" asp-route-categoryId="@item.CategoryId" class="btn btn-outline-secondary btn-sm">Edit Content</a>
                     }
                 </td>
 
