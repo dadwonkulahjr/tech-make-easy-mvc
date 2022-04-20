@@ -12,7 +12,7 @@
 
 </div>
 
-<hr class="section-divider"/>
+<hr class="section-divider" />
 
 <!--Courses Section-->
 <di class="courses section" id="courses">
@@ -25,30 +25,13 @@
     @for (int i = 0; i <= count; i++)
     {
         catList = Model.Skip(i * 4).Take(4).ToList();
-
-        <div class="row mt-3">
-            @foreach (Category catItem in catList)
-            {
-                <div class="col-md-3">
-                    <a href="#" class="text-dark" style="text-decoration:none;">
-                        <div class="card">
-                            <img class="img-thumbnail" src="@catItem.ThumbnailImagePath" asp-append-version="true" alt="@catItem.Title">
-                            <div class="card-body">
-                                <h5 class="card-title">@catItem.Title</h5>
-                                <p class="card-text">@catItem.Description</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            }
-        </div>
-
+        <partial name="_DisplayCardRowPartial" model="catList" />
     }
 </di>
 
 <!--Contact Us Section-->
 
-<hr class="section-divider"/>
+<hr class="section-divider" />
 <div id="contactUs" class="contact-us section">
     <h3 class="col-md-5 section-header"><i class="fas fa-phone-alt mr-2 text-info"></i>Contact Us</h3>
     <div class="col-md-5">
